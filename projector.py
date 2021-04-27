@@ -23,7 +23,7 @@ import dnnlib.tflib as tflib
 
 class Projector:
     def __init__(self):
-        self.num_steps                  = 1000
+        self.num_steps                  = 900
         self.dlatent_avg_samples        = 10000
         self.initial_learning_rate      = 0.1
         self.initial_noise_factor       = 0.05
@@ -229,14 +229,14 @@ def project(network_pkl: str, target_fname: str, outdir: str, save_video: bool, 
     target_pil.save(f'{outdir}/target.png')
     writer = None
     if save_video:
-        writer = imageio.get_writer(f'{outdir}/proj.mp4', mode='I', fps=60, codec='libx264', bitrate='16M')
+        writer = imageio.get_writer(f'{outdir}/proj.mp4', fps=60, codec='mjpeg', quality=10)
 
     # Run projector.
     with tqdm.trange(proj.num_steps) as t:
         for step in t:
             assert step == proj.cur_step
             if writer is not None:
-                writer.append_data(np.concatenate([target_uint8, proj.images_uint8[0]], axis=1))
+                writer.append_data(np.concatenate([target_uint8, proj.images_uint8[0]], axis=0)) # writer.append_data(np.concatenate([target_uint8, proj.images_uint8[0]], axis=1))
             dist, loss = proj.step()
             t.set_postfix(dist=f'{dist[0]:.4f}', loss=f'{loss:.2f}')
 
