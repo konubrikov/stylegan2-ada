@@ -23,9 +23,9 @@ import dnnlib.tflib as tflib
 
 class Projector:
     def __init__(self):
-        self.num_steps                  = 900
+        self.num_steps                  = 480
         self.dlatent_avg_samples        = 10000
-        self.initial_learning_rate      = 0.1
+        self.initial_learning_rate      = 0.2
         self.initial_noise_factor       = 0.05
         self.lr_rampdown_length         = 0.25
         self.lr_rampup_length           = 0.05
