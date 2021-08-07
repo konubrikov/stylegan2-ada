@@ -236,7 +236,7 @@ def project(network_pkl: str, target_fname: str, outdir: str, save_video: bool, 
         for step in t:
             assert step == proj.cur_step
             if writer is not None:
-                writer.append_data(np.concatenate([target_uint8, proj.images_uint8[0]], axis=0)) # writer.append_data(np.concatenate([target_uint8, proj.images_uint8[0]], axis=1))
+                writer.append_data(proj.images_uint8[0]) # writer.append_data(np.concatenate([target_uint8, proj.images_uint8[0]], axis=1))
             dist, loss = proj.step()
             t.set_postfix(dist=f'{dist[0]:.4f}', loss=f'{loss:.2f}')
 
