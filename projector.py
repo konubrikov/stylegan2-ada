@@ -229,7 +229,7 @@ def project(network_pkl: str, target_fname: str, outdir: str, save_video: bool, 
     target_pil.save(f'{outdir}/target.png')
     writer = None
     if save_video:
-        writer = imageio.get_writer(f'{outdir}/proj.mp4', fps=60, codec='mjpeg', quality=10)
+        writer = imageio.get_writer(f'{outdir}/proj.mp4', fps=120, codec='mjpeg', quality=8)
 
     # Run projector.
     with tqdm.trange(proj.num_steps) as t:
